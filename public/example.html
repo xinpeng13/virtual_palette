@@ -5,20 +5,337 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Palette Library</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="./landing.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer type="text/javascript" src="virtual_palette.js"></script>
     <script defer type="text/javascript" src="example.js"></script>
+    
 </head>
+<style>
+  body {font-family: "Playfair Display";}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display";
+    letter-spacing: 3px;
+    color: rgb(182, 133, 214);
+  }
+  </style>
 <body>
-    <h1>Welcome! to the virtual palette experience page</h1>
-    <p>
-        There are three color themes for the virtual palette in this stage: default, minimal and dark, which is 
- represented by the examples below respectively. You can choose to add customized paint colors to the left bar of 
- the virtual palette or use predefined painting sets.
-
-    </p>
-    <div>
-        
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+          <a href="landing.html" class="w3-bar-item w3-button">Virtual Palette</a>
+          <div class="w3-right w3-hide-small">
+            <a href="example.html" class="w3-bar-item w3-button">Examples</a>
+            <a href="api.html" class="w3-bar-item w3-button">API</a>
+            <a href='https://github.com/csc309-winter-2022/js-library-shanxinp' class="w3-bar-item w3-button">Download</a>
+          </div>
+        </div>
     </div>
+
+    <div class="content">
+      
+      <h3>Installation</h3>
+      <p class="explaination">Download the file virtual_palette.js from our github repository</p>
+      <p class="explaination">Include the following codes in the &lt;head&gt; section. Since our library utilized jquery, make sure to include the second line below.</p>
+      <div class = "code">
+        <p><code>&lt;script defer type="text/javascript" src="virtual_palette.js"&gt;&lt;/script&gt;</code></p>
+        <p><code>&lt;script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"&gt;&lt;/script&gt;</code></p>
+      </div>
+      
+      
+      
+      <h3>Usage 1: Painting Palette</h3>
+      <p class="explaination1">End users can:</p>
+      <p class="explaination1">  1. View the hexadecimal code of the paint in the painting set. </p>
+      <p class="explaination1">  2. Add color to the mix by clicking the painting set buttons on the left bar.</p>
+      <p class="explaination1"> 3. Delete color by clicking the color entries on the top of the palette. </p>
+      <p class="explaination1"> 4. Delete all color entries on the top of the palette by clicking the clear button. </p>
+      <p class="explaination1">  5. Add the mixed color to the painting set by clicking on the mixed color.<p>
+      <p class="explaination1">  6. View the info of color mixing by clicking the info button on the top-right corner.<p>
+        <p class="explaination1">  (Additional functionalities will be explained in the following examples)<p>
+        <h5>Basic Painting Palette Example</h5>
+      <p class="explaination">This is a basic non-popup painting palette example. It has default color theme and default usage, "painting". 
+        The paintset added is a pre-defined set named "12color".<p>
+        <div id="example1">
+        
+        </div>
+
+
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <button class="nav-link active" onclick="openCode('basic-js', 'code_chunk1')">JS</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link active" onclick="openCode('basic-html', 'code_chunk1')" >HTML</button>
+          </li>
+        </ul>
+        
+        <div class="code_chunk1" id="basic-html" style="display:none">
+          <div class = "code" >
+            <p><code>&lt;div id="example1"&gt;</code></p>
+            <p><code> &lt;/div&gt;</code></p>
+          </div>
+        </div>
+        
+        <div class="code_chunk1" id="basic-js" >
+          <div class = "code" >
+            <p class= "comment">// create a new PaletteGenerator that is not in a popup format </p>
+            <p class= "comment">  // the first boolean argument inside PaletteGenerator indicates whether you want to create a popup palette</p>
+            <p><code>const pg_12 = new PaletteGenerator(false)</code></p>
+            <p class= "comment">// add the pre-defined 12 colors paintset '12color' to the PaletteGenerator </p>
+            <p><code>pg_12.addPaintSet("12color")</code></p>
+            <p class= "comment">// add customized title "12 COLOR PAINTSET" to the PaletteGenerator </p>
+            <p><code>pg_12.addTitle("12 COLOR PAINTSET")</code></p>
+            <p class= "comment">// find the place on the html that you want to insert the palette </p>
+            <p><code>const ptr1 = document.getElementById("example1")</code></p>
+            <p class= "comment">// append this.show to the place you want to insert the palette</p>
+            <p><code>ptr1.appendChild(pg_12.show)</code></p>
+          </div>
+        </div>
+
+
+        <h5>Pop Up Customized Painting Palette Example</h5>
+        <p class="explaination">This is a pop up customized painting palette example. It has "dark" color theme and default usage, "painting". 
+          Developer can customize the title of the painting set and the color that added.<p>
+          <div id="example2">
+          
+          </div>
+  
+  
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('popup-js', 'code_chunk2')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('popup-html', 'code_chunk2')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk2" id="popup-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example2"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk2" id="popup-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new popup PaletteGenerator </p>
+              <p><code>const pg_purple = new PaletteGenerator(true)</code></p>
+              <p class= "comment">// add your own customized colors (in hexadecimal format) to the PaletteGenerator </p>
+              <p><code>pg_purple.addColor("#ffccff")</code></p>
+              <p><code>pg_purple.addColor("#ccccff")</code></p>
+              <p><code>pg_purple.addColor("#99ccff")</code></p>
+              <p><code>pg_purple.addColor("#66ccff")</code></p>
+              <p><code>pg_purple.addColor("#33ccff")</code></p>
+              <p class= "comment">// add customized title to the PaletteGenerator </p>
+              <p><code>pg_purple.addTitle("Customized PAINTSET"))</code></p>
+              <p class= "comment">// select theme "dark" </p>
+              <p><code>pg_purple.selectTheme("dark")</code></p>
+              <p><code>const ptr2 = document.getElementById("example2")</code></p>
+              <p><code>ptr2.appendChild(pg_purple.show)</code></p>
+            </div>
+          </div>
+      
+          <h5>Designer Painting Palette Example</h5>
+          <p class="explaination">This is a non-popup designer painting palette example. It has "minimal" color theme and default usage, "painting". 
+          <p class="explaination"> End users can select the paint that is added to the painting set themselves.<p>
+          <div id="example5">
+          
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('designer-js', 'code_chunk5')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('designer-html', 'code_chunk5')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk5" id="designer-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example5"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk5" id="designer-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new non-popup designer painting PaletteGenerator </p>
+
+              <p><code>const pg_designer = new PaletteGenerator(false, "painting", true)</code></p>
+              <p><code>pg_designer.selectTheme("minimal")</code></p>
+              <p><code>const ptr5 = document.getElementById("example5")</code></p>
+              <p><code>ptr5.appendChild(pg_designer.show)</code></p>
+            </div>
+          </div>
+    
+      <h3>Usage 2: Watercolor Palette</h3>
+      <p class="explaination1">End users can:</p>
+      <p class="explaination1"> 1. Have all the functionalities in Usage 1</p>
+        <p class="explaination1"> 2. Alter the water level to the mixed color<p>
+        <p class="explaination1"> 3. Select the background color where the paint will be add on by clicking on the button on the bottom-right corner<p>
+      <h5>Watercolor Palette Example</h5>
+      <p class="explaination">This is a non-popup watercolor palette example. It has "minimal" color theme and "watercolor" usage. 
+        The paintset added is a pre-defined set named "pastel".<p>
+          <div id="example3">
+          
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('watercolor-js', 'code_chunk3')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('watercolor-html', 'code_chunk3')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk3" id="watercolor-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example3"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk3" id="watercolor-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new non-popup watercolor PaletteGenerator </p>
+              <p class= "comment"> // by entering "watercolor" as the second argument</p>
+              <p><code>const pg_watercolor = new PaletteGenerator(false, "watercolor")</code></p>
+              <p><code>pg_watercolor.addTitle("Pastel PAINTSET")</code></p>
+              <p class= "comment">// add pre-defined pastel paintset 'pastel' to the PaletteGenerator </p>
+              <p><code>pg_watercolor.addPaintSet("pastel")</code></p>
+              <p><code>pg_watercolor.selectTheme("minimal")</code></p>
+
+              <p><code>const ptr3 = document.getElementById("example3")</code></p>
+              <p><code>ptr3.appendChild(pg_watercolor.show)</code></p>
+            </div>
+          </div>
+
+          <h5>Designer Pop-up Watercolor Palette Example</h5>
+          <p class="explaination">This is a pop up designer watercolor palette example. It has default color theme and "watercolor" usage. </p>
+          <p class="explaination"> End users can select the paint that is added to the painting set themselves.<p>
+          <div id="example6">
+          
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('designer-watercolor-js', 'code_chunk6')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('designer-watercolor-html', 'code_chunk6')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk6" id="designer-watercolor-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example6"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk6" id="designer-watercolor-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new Pop-up designer watercolor PaletteGenerator </p>
+              <p><code>const pg_watercolor_designer = new PaletteGenerator(true, "watercolor", true)</code></p>
+              <p><code>const ptr6 = document.getElementById("example6")</code></p>
+
+              <p><code>ptr6.appendChild( pg_watercolor_designer.show)</code></p>
+            </div>
+          </div>
+
+    <h3>Usage 3: Cosmetics Palette</h3>
+    <p class="explaination1">End users can:</p>
+    <p class="explaination1"> 1. Have all the functionalities in Usage 1</p>
+    <p class="explaination1"> 2. Alter skintone that the mixed color will be applied on.<p>
+      <h5>Cosmetic Palette Example</h5>
+      <p class="explaination">This is a non-popup cosmetics palette example. It has "dark" color theme and "cosmetics" usage. 
+        The paintset added is a pre-defined set named "lipstick". </p>
+          <div id="example4">
+          
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('cosmetics-js', 'code_chunk4')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('cosmetics-html', 'code_chunk4')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk4" id="cosmetics-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example4"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk4" id="cosmetics-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new non-popup cosmetic PaletteGenerator </p>
+              <p class= "comment"> // by entering "cosmetics" as the second argument</p>
+
+              <p><code> const pg_cosmetics = new PaletteGenerator(false, "cosmetics")</code></p>
+              <p class= "comment">// add pre-defined lipstick paintset 'lipstick' to the PaletteGenerator </p>
+              <p><code>pg_cosmetics.addPaintSet("lipstick")</code></p>
+              <p><code>pg_cosmetics.selectTheme("minimal")</code></p>
+
+              <p><code>const ptr4 = document.getElementById("example4")</code></p>
+              <p><code>ptr4.appendChild(pg_cosmetics.show)</code></p>
+            </div>
+          </div>
+
+          <h5>Customized Designer Cosmetics Palette Example</h5>
+          <p class="explaination">This is a non-popup designer cosmetics palette example. It has "minimal" color theme and "cosmetics" usage. </p>
+          <p class="explaination"> Developer can customize the title of the painting set and the color that added. End users can select the paint that is added to the painting set themselves.<p>
+          <div id="example7">
+          
+          </div>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('customized-cosmetics-js', 'code_chunk7')">JS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" onclick="openCode('customized-cosmetics-html', 'code_chunk7')" >HTML</button>
+            </li>
+          </ul>
+          
+          <div class="code_chunk7" id="customized-cosmetics-html" style="display:none">
+            <div class = "code" >
+              <p><code>&lt;div id="example7"&gt;</code></p>
+              <p><code> &lt;/div&gt;</code></p>
+            </div>
+          </div>
+          
+          <div class="code_chunk7" id="customized-cosmetics-js" >
+            <div class = "code" >
+              <p class= "comment">// create a new customized designer Cosmetics PaletteGenerator </p>
+              <p><code>const pg_customized_cosmetics = new PaletteGenerator(false, "cosmetics", true)</code></p>
+              <p><code>pg_customized_cosmetics.selectTheme("minimal")</code></p>
+              <p><code>pg_customized_cosmetics.addTitle("eye shadow")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#c96e51")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#e08b64")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#e3d3c4")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#dba579")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#aa7c65")</code></p>
+              <p><code>pg_customized_cosmetics.addColor("#845953")</code></p>
+              <p><code>const ptr7 = document.getElementById("example7")
+              <p><code>ptr7.appendChild( pg_customized_cosmetics.show)
+            </div>
+          </div>
+          
+    </div>
+    </div>
+    
+    <footer class="w3-center w2-light-grey w3-padding-16">
+      <p>© Created by Xinpeng Shan</p>
+    </footer>
+    
 </body>
 </html>

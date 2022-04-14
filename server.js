@@ -8,7 +8,7 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/public/example.html')
+	res.sendFile(__dirname + '/public/landing.html')
 });
 
 app.listen(port, () => {
