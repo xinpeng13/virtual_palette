@@ -2,13 +2,11 @@
 (function(global, document, $) { 
 function PaletteGenerator(popup, usage, designer){
     this.show
-    if(this.popup != undefined){
+    if(popup != undefined){
         this.popup = popup
     }else{
         this.popup = false
     }
-    
-    
     this.palette
     this.colors = []
     this.entries = []
