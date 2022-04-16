@@ -41,7 +41,7 @@ PaletteGenerator.prototype = {
         paletteHeader.className = 'paletteHeader'
 
         const paletteInfo = document.createElement('button')
-        paletteInfo.style = 'width: 25px; height: 25px; background-color: #bfd8c4; display:inline-block; border-radius:50%;margin-top:7px;'
+        paletteInfo.style = 'width: 27px; height: 27px; background-color: #bfd8c4; display:inline-block; border-radius:50%;margin-top:7px;'
         paletteInfo.className = 'paletteInfo'
         let ifInfoClick = 0
         paletteInfo.onclick = function(){
@@ -103,10 +103,11 @@ PaletteGenerator.prototype = {
 
         const paletteLeftBar = document.createElement('div')
         if(this.usage == "watercolor" || this.usage == "painting"){
-            paletteLeftBar.style = 'width: 28%; height:295px; background-color: #f5o5cb; overflow: auto; display:inline-block;margin-left:5px;border-style:ridge;border-color:white;'
+            paletteLeftBar.style = 'width: 28%; height:295px; background-color: #f5o5cb; overflow: auto; display:inline-block;margin-left:5px;border-style:ridge;border-color:white;scrollbar-width: none;-ms-overflow-style: none;'
+
         }
         else{
-            paletteLeftBar.style = 'width: 90%; height:17%; background-color: #f5o5cb; overflow: auto;display:inline-block;margin-left:5px;border-style:ridge;border-color:white;'
+            paletteLeftBar.style = 'white-space: nowrap;width: 90%; height:15%; background-color: #f5o5cb; overflow-x: scroll;overflow-y:hidden;margin-left:5px;border-style:ridge;border-color:white;display:centered'
         }
         if(this.designer == true){
             if(this.usage != "cosmetics"){
@@ -121,23 +122,78 @@ PaletteGenerator.prototype = {
         paletteLeftBar.className = 'paletteLeftBar'
 
         const paletteMain = document.createElement('div')
-        paletteMain.style = 'width: 65%; height:280px; background-color: #f6f6e8; display:inline-block;border-radius:10%;margin-left:10px;margin-bottom:10px;transition:0.5s;'
+        paletteMain.style = 'width: 65%; height:280px; background-color: #f6f6e8; display:inline-block;border-radius:10%;margin-left:10px;margin-bottom:10px;transition:0.3s;transition-timing-function: ease-out;'
 
         paletteMain.onclick = ()=>{
             this.addColor(_RGBToHex(paletteMain.style.backgroundColor))
         }
         paletteMain.onmouseover = ()=>{
-            const paletteMainText = document.createElement("div");
-            paletteMainText.innerText = "click to add me to paintset";
-            paletteMainText.style = "position:absolute;font-family: 'Lucida Console', 'Courier New', monospace;font-size:3px;background-color:white;border-radius:10%; opacity:70%; width:130px; height:50px;padding:7px;"
-            if(this.usage == "cosmetics"){
-                paletteMainText.style.marginTop = "80px";
+            const textMain = document.createElement("div")
+            
+            textMain.className = "textMain"
+            textMain.style = "position:relative;font-family:copperplate;"
+            textMain.style.color = paletteMain.style.backgroundColor
+            textMain.innerText = "Add to paintset"
+            paletteContainer.appendChild(textMain)
+            if(this.usage == "painting"){
+                paletteMain.style.width ="66%"
+                paletteMain.style.height ="283px"
+                paletteMain.style.transition ="0.1s"
+                textMain.style.left = "200px"
+                textMain.style.bottom = "20px"
+                if(this.designer == true){
+                    textMain.style.bottom = "90px"
+                }
             }
-            paletteMain.appendChild(paletteMainText)
+            else if(this.usage == "watercolor"){
+                paletteMain.style.width ="205px"
+                paletteMain.style.height ="205px"
+                paletteMain.style.transition ="0.1s"
+                textMain.style.left = "200px"
+                textMain.style.bottom = "655px"
+                if(this.designer == true){
+                    paletteMain.style.width ="205px"
+                    paletteMain.style.height ="201px"
+                    textMain.style.bottom = "720px"
+                }
+            }
+            else if(this.usage == "cosmetics"){
+                paletteMain.style.width ="51%"
+                paletteMain.style.right ="2px"
+                textMain.style.bottom = "640px"
+                textMain.style.left = "90px"
+                if(this.designer == true){
+                    textMain.style.bottom = "710px"
+                }
+            }
+            
+            
         }
         paletteMain.onmouseout = ()=>{
+            const textMain = $(this.palette).find('.textMain')[0]
+            textMain.remove()
+            if(this.usage == "painting"){
+                paletteMain.style.width ="65%"
+                paletteMain.style.height ="280px"
+                paletteMain.style.transition ="0.3s"
+            }
+            else if(this.usage == "watercolor"){
+                paletteMain.style.width ="200px"
+                paletteMain.style.height ="200px"
+                paletteMain.style.transition ="0.3s"
+                if(this.designer == true){
+                    const paintsetTitle = $(this.palette).find('.paintsetTitle')[0]
+                    console.log(paintsetTitle)
+                    paintsetTitle.style.bottom = "650px"
+                }
+            }
+            else if(this.usage == "cosmetics"){
+                paletteMain.style.width ="50%"
+                paletteMain.style.height ="20%"
 
-            paletteMain.innerHTML = "";
+                paletteMain.style.right ="0px"
+                paletteMain.style.transition ="0.1s"
+            }
         }
         paletteMain.className = 'paletteMain'
 
@@ -162,22 +218,22 @@ PaletteGenerator.prototype = {
         
 
 
-        if(this.usage == "cosmetics"){
-            paletteMain.style = 'width: 50%; height:20%; background-color: #f6f6e8; display:inline-block;border-radius:3%;margin-left:50px; position:relative; bottom:380px'
+        if(this.usage == "cosmetics"){ 
+            paletteMain.style = 'width: 50%; height:20%; background-color: #f6f6e8; display:inline-block;border-radius:3%;margin-left:50px; position:relative; bottom:530px;transition:0.1s;transition-timing-function: ease-out;'
             const paletteSkintone = document.createElement('div')
-            paletteSkintone.style = 'width: 100%; height:71%; display:inline-block;border-bottom-right-radius:5%;border-bottom-left-radius:5%; position:relative; bottom:5px; '
+            paletteSkintone.style = 'width: 100%; height:73%; display:inline-block;border-bottom-right-radius:5%;border-bottom-left-radius:5%; position:relative; top:0px;'
             paletteContainer.appendChild(paletteSkintone)
-            paletteContainer.appendChild(paletteMain)
+            
             
             // add rightbar functionality
             const paletteRight = document.createElement('div')
-            paletteRight.style = 'width: 30%; height:75%; display:inline-block;position:relative; bottom:300px; left:40px;'
+            paletteRight.style = 'width: 30%; height:75%; display:inline-block;position:relative; bottom:300px; left:285px;'
             paletteContainer.appendChild(paletteRight)
 
             // title
             const bottemTitle = document.createElement('p')
             bottemTitle.innerText = "Skintone"
-            bottemTitle.style = "color:grey;font-family: 'Copperplate';font-size:small; position:relative;top:8px;"
+            bottemTitle.style = "color:grey;font-family: 'Copperplate';font-size:small; position:relative;top:12px;"
             paletteRight.appendChild(bottemTitle)
 
             const paletteSkintoneButton1 = document.createElement('button')
@@ -250,17 +306,17 @@ PaletteGenerator.prototype = {
                 paletteSkintone.style.backgroundColor = "#1f1101";
             }    
 
+            const paletteTitleContainer = document.createElement("div")
+            paletteTitleContainer.style = "width:270px;height:30px;position:relative;bottom:585px;left:7px;"
+            paletteTitleContainer.className = "paletteTitleContainer"
+            paletteContainer.appendChild(paletteTitleContainer);
+           
+            paletteContainer.appendChild(paletteMain)
         }else if(this.usage == "watercolor"){
             const paletteMainContainer = document.createElement('div')
-            paletteMainContainer.style = 'width: 70%; height:85%; display:inline-block; border-bottom-right-radius:5%; bottom:67px;;position:relative;transition:0.3s;'
+            paletteMainContainer.style = 'width: 70%; height:85.5%; display:inline-block; border-bottom-right-radius:5%;top:3px;;position:relative;transition:0.3s;'
             paletteContainer.appendChild(paletteMainContainer)
-            // edit style of paletteMain
-            paletteMainContainer.appendChild(paletteMain)
-            paletteMain.style.width = "200px"
-            paletteMain.style.height = "200px"
-            paletteMain.style.marginLeft = "40px"
-            paletteMain.style.marginTop = "15px"
-            
+            // edit style of paletteMain      
             // add bottem functionality
             const paletteBottem = document.createElement('div')
             paletteBottem.style = 'width: 70%; height:15%; display:inline-block;position:relative; bottom:130px; left:120px;'
@@ -270,14 +326,14 @@ PaletteGenerator.prototype = {
             // add water title
             const bottemTitle = document.createElement('p')
             bottemTitle.innerText = "Add water"
-            bottemTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:10px;left:12px;"
+            bottemTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; top:55px;left:12px;"
              paletteBottem.appendChild(bottemTitle)
             // input range
             const rangeButton = document.createElement('input')
             rangeButton.type = "range";
             rangeButton.min = "0";
             rangeButton.max = "100";
-            rangeButton.style = " direction: rtl; width: 180px;position:relative; bottom:13px;left:10px;"
+            rangeButton.style = " direction: rtl; width: 180px;position:relative; top:50px;left:10px;"
             rangeButton.addEventListener("change", changeRange, false);
             function changeRange(event) {
                 paletteMain.style.opacity = event.target.value / 100
@@ -288,7 +344,7 @@ PaletteGenerator.prototype = {
             // select background title
             const backgroundTitle = document.createElement('p')
             backgroundTitle.innerText = "Background"
-            backgroundTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:68px;left:180px;"
+            backgroundTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:3px;left:180px;"
              paletteBottem.appendChild(backgroundTitle)
 
             // input background color
@@ -300,7 +356,15 @@ PaletteGenerator.prototype = {
             }
             colorButton.select();
             paletteBottem.appendChild(colorButton)
-            colorButton.style = 'width: 30px; height:30px; background-color: #1f1101; display:inline-block;position:relative;bottom:80px;left:230px;'
+            colorButton.style = 'width: 30px; height:30px; background-color: #1f1101; display:inline-block;position:relative;bottom:15px;left:230px;'
+            paletteContainer.appendChild(paletteMain)
+            paletteMain.style.width = "200px"
+            paletteMain.style.height = "200px"
+            paletteMain.style.marginLeft = "40px"
+            paletteMain.style.position = "relative"
+            paletteMain.style.bottom = "410px"
+            paletteMain.style.left = "115px"
+            
         }
         else{
             paletteContainer.appendChild(paletteMain)
@@ -311,14 +375,15 @@ PaletteGenerator.prototype = {
 
             // add paint title
             const paintsetTitle = document.createElement('p')
+            paintsetTitle.className = "paintsetTitle"
             paintsetTitle.innerText = "Add paint"
             if(this.usage == "painting"){
                 paintsetTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:300px;left:10px;color:Grey;"
             }else if(this.usage == "watercolor"){
-                paintsetTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:495px;left:10px;color:Grey;"
+                paintsetTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:650px;left:10px;color:Grey;"
             }
             else if(this.usage == "cosmetics"){
-                paintsetTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:660px;left:290px;color:Grey;"
+                paintsetTitle.style = "font-family: 'Copperplate';font-size:small; position:relative; bottom:765px;left:290px;color:Grey;"
             }
             paletteContainer.appendChild(paintsetTitle)
 
@@ -328,14 +393,14 @@ PaletteGenerator.prototype = {
             colorPaintset.type = "color";
             colorPaintset.addEventListener("change",(event)=> this.addColor(event.target.value), false);
             colorPaintset.select();
-            
+            colorPaintset.className = "colorPaintset"
             if(this.usage == "painting"){
                colorPaintset.style = 'width: 40px; height:30px;  display:inline-block;position:relative;bottom:340px;left:80px; '
             }else if(this.usage == "watercolor"){
-                colorPaintset.style = 'width: 40px; height:30px;  display:inline-block;position:relative;bottom:530px;left:77px; '
+                colorPaintset.style = 'width: 40px; height:30px;  display:inline-block;position:relative;bottom:680px;left:77px; '
             }
             else if(this.usage == "cosmetics"){
-                colorPaintset.style = 'width: 40px; height:30px;  display:inline-block;position:relative;bottom:675px;left:300px; '
+                colorPaintset.style = 'width: 40px; height:30px;  display:inline-block;position:relative;bottom:780px;left:300px; '
             }
             paletteContainer.appendChild(colorPaintset)
         }
@@ -383,16 +448,19 @@ PaletteGenerator.prototype = {
 
         ColorContainer.style = 'width: 100%; height: 30px; '
         if(this.usage == "cosmetics"){
-             ColorContainer.style = 'width: 36px; height: 36px;border-radius:50%; margin:3px;'
+             ColorContainer.style = 'width: 40px; height: 40px;border-radius:50%; margin:3px;display:inline;'
         }
         ColorContainer.style.backgroundColor = color
         ColorContainer.onmouseover=()=>{
             if(this.usage == "cosmetics"){
                 const colorText = document.createElement("div")
-                ColorContainer.style.width = "42px"
-                ColorContainer.style.height = "42px"
+                ColorContainer.style.width = "43px"
+                ColorContainer.style.height = "43px"
                 ColorContainer.style.margin = "0px"
-                colorText.style = 'width:65px; height:20px; background-color:white;position:relative; bottom:23px;border-radius:10%;opacity:70%;right:20px;'
+                ColorContainer.style["transition-timing-function"]=" ease-in";
+                ColorContainer.style["transition"]= "0.2s";
+                
+                colorText.style = 'width:65px;margin-top:0px; height:20px; background-color:white;position:relative; bottom:28px;border-radius:10%;opacity:70%;right:20px;'
                 colorText.innerText = color
                 ColorContainer.appendChild(colorText)
             }else{
@@ -403,8 +471,8 @@ PaletteGenerator.prototype = {
         }
         ColorContainer.onmouseout = ()=>{
             if(this.usage == "cosmetics"){
-                ColorContainer.style.width = "36px"
-                ColorContainer.style.height = "36px"
+                ColorContainer.style.width = "40px"
+                ColorContainer.style.height = "40px"
                 ColorContainer.style.margin = "3px"
                 ColorContainer.innerHTML = ""
             }
@@ -417,7 +485,8 @@ PaletteGenerator.prototype = {
 
         ColorContainer.onclick = function handlePush(){
             const entryButton = document.createElement('button')
-            entryButton.style = 'width: 15px; height: 15px; margin:2px;float: left;margin-top:15px;'
+            entryButton.style = 'width: 15px; height: 15px; margin:2px;float: left;margin-top:15px;transition-timing-function: ease-in;transition: 0.15s;'
+
             entryButton.onmouseover = ()=>{
                 entryButton.style.width = '20px'
                 entryButton.style.height = '20px'
@@ -510,10 +579,21 @@ PaletteGenerator.prototype = {
     addTitle: function(title){
         const titleEntry = document.createElement('div')
         titleEntry.style = "float:left;font-family: 'Lucida Console', 'Courier New', monospace;background-color:#3a3b3c;width:100%;height:auto;color:White;text-align: center;overflow:auto;text-shadow: 0.5px 0.5px 6px white;border-style:ridge;"
+        if(this.usage == "cosmetics"){
+            titleEntry.style.width = "100%";
+            titleEntry.style.height = "100%";
+            titleEntry.style.padding = "3px";
+            titleEntry.innerText = title
+            
 
-        titleEntry.innerText = title
-        const paletteLeftBar = $(this.palette).find('.paletteLeftBar')[0]
-        paletteLeftBar.insertBefore(titleEntry, paletteLeftBar.children[0]);
+            const paletteTitleContainer = $(this.palette).find('.paletteTitleContainer')[0]
+            paletteTitleContainer.appendChild(titleEntry);
+        }else{
+            titleEntry.innerText = title
+            const paletteLeftBar = $(this.palette).find('.paletteLeftBar')[0]
+            paletteLeftBar.insertBefore(titleEntry, paletteLeftBar.children[0]);
+        }
+        
     },
     selectTheme:function(theme){
         const paletteContainer = $(this.palette)[0]
