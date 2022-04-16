@@ -307,7 +307,7 @@ PaletteGenerator.prototype = {
             }    
 
             const paletteTitleContainer = document.createElement("div")
-            paletteTitleContainer.style = "width:270px;height:30px;position:relative;bottom:585px;left:7px;"
+            paletteTitleContainer.style = "width:270px;height:30px;position:relative;bottom:585px;left:7px;overflow:scroll;"
             paletteTitleContainer.className = "paletteTitleContainer"
             paletteContainer.appendChild(paletteTitleContainer);
            
