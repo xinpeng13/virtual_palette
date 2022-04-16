@@ -37,7 +37,7 @@ PaletteGenerator.prototype = {
         paletteContainer.className = 'paletteContainer'
 
         const paletteHeader = document.createElement('div')
-        paletteHeader.style = 'width: 365px; height: 40px;  overflow-x: auto;white-space: nowrap; display: inline-block;'
+        paletteHeader.style = 'white-space: nowrap;width: 365px; height: 40px; overflow-x: auto;display: inline-block;'
         paletteHeader.className = 'paletteHeader'
 
         const paletteInfo = document.createElement('button')
@@ -485,16 +485,17 @@ PaletteGenerator.prototype = {
 
         ColorContainer.onclick = function handlePush(){
             const entryButton = document.createElement('button')
-            entryButton.style = 'width: 15px; height: 15px; margin:2px;float: left;margin-top:15px;transition-timing-function: ease-in;transition: 0.15s;'
+            entryButton.style = 'width: 16px; height: 16px; margin:2px;margin-top:15px;transition-timing-function: ease-in;transition: 0.15s;display:inline;'
 
             entryButton.onmouseover = ()=>{
                 entryButton.style.width = '20px'
                 entryButton.style.height = '20px'
-                entryButton.style.marginTop = '12px'
+                entryButton.style.margin = '0px'
             }
             entryButton.onmouseout = ()=>{
-                entryButton.style.width = '15px'
-                entryButton.style.height = '15px'
+                entryButton.style.width = '16px'
+                entryButton.style.height = '16px'
+                entryButton.style.margin = '2px'
                 entryButton.style.marginTop = '15px'
             }
             entryButton.style.backgroundColor = color
