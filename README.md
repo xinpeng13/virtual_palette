@@ -15,7 +15,7 @@ Download virtual_palette.js from our github repository.Include the following cod
 ```
 
 ## Example Code Snippet
-
+(Here are some example code snippets, if you want to check out more examples, please see it is the deployed web page.)
 ### Basic Painting Palette Example
 Create a basic non-popup painting palette. It has default color theme and default usage, "painting". The paintset added is a pre-defined set named "12color"
 
