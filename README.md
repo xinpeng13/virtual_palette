@@ -1,11 +1,5 @@
 # js-library-shanxinp
 
-## Landing Page: 
-https://gentle-cliffs-11922.herokuapp.com/
-
-## Documentation: 
-https://gentle-cliffs-11922.herokuapp.com/api.html
-
 ## Installation
 Download virtual_palette.js from our github repository.Include the following codes in the &lt;head&gt; section. Since our library utilized jquery, make sure to include the second line below.
 
